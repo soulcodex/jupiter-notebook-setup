@@ -1,0 +1,17 @@
+services:
+
+  jupyter-notebook:
+    image: jupyter/base-notebook:python-3.10.11
+    user: root
+    container_name: jupyter-notebook
+    ports:
+      - "8000:8888"
+    command: "start-notebook.sh --NotebookApp.token=''"
+    environment:
+      NB_USER: notebook
+      NB_UID: $HOST_UID
+      NB_GID: $HOST_GID
+      CHOWN_HOME: 'yes'
+      CHOWN_HOME_OPTS: -R
+    volumes:
+      - ./workspace:/home/notebook/work
